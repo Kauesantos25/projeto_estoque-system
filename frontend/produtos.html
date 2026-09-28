@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Produtos — Sistema de Estoque</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">estoque<span>DB</span></div>
+    <a class="nav-item" href="index.html">Dashboard</a>
+    <a class="nav-item" href="produtos.html">Produtos</a>
+    <a class="nav-item" href="categorias.html">Categorias</a>
+    <a class="nav-item" href="movimentacoes.html">Movimentação</a>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div><h1>Produtos</h1><p id="totalProdutos">Carregando...</p></div>
+      <div style="display:flex; gap:10px;">
+        <div class="search"><input id="campoBusca" placeholder="Buscar por código ou nome"></div>
+        <button class="btn btn-primary" onclick="abrirFormulario()">+ Novo produto</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th><th>Produto</th><th>Categoria</th><th>Qtd</th>
+            <th>Preço venda</th><th>Status</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="corpoTabela"></tbody>
+      </table>
+      <p id="mensagemVazia" class="msg-vazio hidden">Nenhum produto encontrado.</p>
+    </div>
+  </main>
+</div>
+
+<!-- Modal do formulário (cadastro e edição usam o mesmo) -->
+<div id="modalFormulario" class="modal-backdrop hidden">
+  <div class="modal" style="width:520px;">
+    <h3 id="tituloFormulario">Cadastrar produto</h3>
+    <form id="formProduto">
+      <input type="hidden" id="idProduto">
+      <div class="form-grid">
+        <div class="field"><label>Código</label><input id="codigoProduto" required></div>
+        <div class="field"><label>Nome</label><input id="nomeProduto" required></div>
+        <div class="field full"><label>Descrição</label><textarea id="descricaoProduto" rows="2"></textarea></div>
+        <div class="field"><label>Categoria</label><select id="categoriaProduto"><option value="">Sem categoria</option></select></div>
+        <div class="field"><label>Fornecedor</label><input id="fornecedorProduto"></div>
+        <div class="field"><label>Quantidade</label><input id="quantidadeProduto" type="number" value="0"></div>
+        <div class="field"><label>Estoque mínimo</label><input id="estoqueMinimoProduto" type="number" value="0"></div>
+        <div class="field"><label>Preço de custo</label><input id="precoCustoProduto" type="number" step="0.01" value="0"></div>
+        <div class="field"><label>Preço de venda</label><input id="precoVendaProduto" type="number" step="0.01" value="0"></div>
+      </div>
+      <p id="erroFormulario" class="msg-erro hidden"></p>
+      <div class="form-actions">
+        <button type="button" class="btn" onclick="fecharFormulario()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal de confirmação de exclusão -->
+<div id="modalExclusao" class="modal-backdrop hidden">
+  <div class="modal">
+    <h3>Excluir produto?</h3>
+    <p id="textoExclusao"></p>
+    <div class="form-actions">
+      <button class="btn" onclick="fecharExclusao()">Cancelar</button>
+      <button class="btn btn-danger" onclick="confirmarExclusao()">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/produtos.js"></script>
+</body>
+</html>
